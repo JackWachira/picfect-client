@@ -1,3 +1,24 @@
-<p>
-  canvas works!
-</p>
+<md-card class="main-image">
+  <img class="img-responsive" md-card-image src="../img/beach.png">
+  <md-card-actions>
+    <i class="material-icons md-36">rotate_left</i>
+    <i class="material-icons md-36">flip</i>
+    <i class="material-icons md-36">crop</i>
+  </md-card-actions>
+</md-card>
+
+<div class="btn-operations">
+  <button type="button" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-floppy-saved"></span> SAVE
+  </button>
+  <button type="button" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-share"></span> SHARE
+  </button>
+</div>
+
+<div class="filter-container">
+  <div *ngFor="let filter of filters" class="filters">
+    <img src="../img/beach.png">
+    <p>{{filter.name}}</p>
+  </div>
+</div>

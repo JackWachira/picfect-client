@@ -1,0 +1,47 @@
+.main-image{
+    width: 400px;
+    height: 350px;
+    margin: 30px auto;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+md-card-actions{
+    text-align: center;
+    margin-top: 20px;
+}
+md-card img{
+    /*width: 250px;
+    height: 250px;*/
+}
+.btn-primary{
+    background-color: #30414A;
+}
+.btn-operations{
+    text-align: center;
+}
+.filters{
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+}
+.filters img{
+    width: 100px;
+    height: 80px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.filters p{
+    display: block;
+    font-family: 'Lato', sans-serif;
+}
+
+.filter-container{
+    height: 120px;
+    width: 600px;
+    border: 1px solid grey;
+    white-space: nowrap;
+    border-width:thin;
+    overflow:auto;
+    margin-top: 10px;
+    padding: 10px;
+}

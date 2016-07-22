@@ -1,3 +1,9 @@
-<p>
-  category works!
-</p>
+<div class="card-container">
+    <label>CATEGORIES</label>
+    <md-card *ngFor="let category of categories">
+        <img class="img-circle" id="placeholder" md-card-image [alt]="category.name" src="../img/{{category.image}}">
+        <md-card-content>
+            <p>{{category.name}}</p>
+        </md-card-content>
+    </md-card>
+</div>

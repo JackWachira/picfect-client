@@ -1,0 +1,30 @@
+html,body,.container{
+      height:100vh;
+}
+.container{
+    display:table;
+    width: 100%;
+    margin-top: -50px;
+    padding-top: 50px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.row{
+    height: 100%;
+    display: table-row;
+}
+.col-md-3.no-float, .col-md-6.no-float {
+    float: none;
+}
+.col-md-3{
+    display: table-cell;
+    width: 25%;
+    vertical-align: top;
+}
+.col-md-6{
+    display: table-cell;
+    width: 50%;
+}
+md-toolbar.md-primary{
+      background: red;
+}
