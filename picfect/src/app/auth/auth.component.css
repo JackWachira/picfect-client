@@ -1,0 +1,35 @@
+.container-fluid {
+    height:100vh;
+    background: url(../img/pattern.png) repeat-y center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align:center;
+
+}
+#logo {
+    background: url(../img/logo.png) no-repeat;   
+    height: 100%;
+    width: 100%;
+}
+.container-fluid button {
+    border-radius: 0 !important;
+}
+.drop-shadow {
+    height: 450px;
+    width: 450px;
+    margin: 20px auto 20px auto;    
+    padding:1em;
+    background:#FAFAFA;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content:"";
+    position:absolute;
+    z-index:-2;
+}
