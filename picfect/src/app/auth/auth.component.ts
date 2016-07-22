@@ -2,15 +2,13 @@
 /// <reference path='../../../typings/jquery/jquery.d.ts'/>
 
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
-import {Auth} from './auth.service';
 declare var $: JQueryStatic;
 
 @Component({
   moduleId: module.id,
   selector: 'app-auth',
   templateUrl: 'auth.component.html',
-  styleUrls: ['auth.component.css'],
-  providers: [Auth]
+  styleUrls: ['auth.component.css']
 })
 export class AuthComponent implements OnInit, AfterViewInit {
   @ViewChild('appname') el: ElementRef;

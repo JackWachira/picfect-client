@@ -7,11 +7,29 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  '@angular2-material': 'vendor/@angular2-material',
+  'angular2-jwt': 'vendor/angular2-jwt'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'angularfire2': {main: 'angularfire2.js'},
+  'angular2-jwt': {main: 'angular2-jwt.js'},
 };
+const materialPkgs:string[] = [
+  'core',
+  'toolbar',
+  'icon',
+  'button',
+  'sidenav',
+  'list',
+  'card',
+  'input',
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GalleryComponent} from '../gallery'
-import {CategoriesComponent} from '../categories'
+import {CategoryComponent} from '../category'
 import {CanvasComponent} from '../canvas'
 
 @Component({
@@ -8,7 +8,7 @@ import {CanvasComponent} from '../canvas'
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [GalleryComponent, CategoriesComponent, CanvasComponent]
+  directives: [GalleryComponent, CategoryComponent, CanvasComponent]
 })
 export class HomeComponent implements OnInit {
 
