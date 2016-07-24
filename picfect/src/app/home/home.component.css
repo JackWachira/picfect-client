@@ -1,5 +1,5 @@
 html,body,.container{
-      height:100vh;
+      /*height:100vh;*/
 }
 .container{
     display:table;
@@ -27,4 +27,19 @@ html,body,.container{
 }
 md-toolbar.md-primary{
       background: red;
+}
+.fill-space { 
+       flex: 1 1 auto;
+}
+.img-circle{
+    width: 30px;
+    height: 30px;
+    border:1px solid white;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px; 
+}
+#user-name{
+    margin-right: 10px;
+    font-size: 15px;
 }

@@ -7,7 +7,7 @@
 <div class="container">
   <div class="row" style="background-color: #F5F8FA;">
     <div class="col-md-3 no-float">
-      <app-gallery></app-gallery>
+      <app-gallery [categoryId]="categoryId" [categoryName]="categoryName" ></app-gallery>
     </div>
 
     <div class="col-md-6 no-float">
@@ -15,8 +15,7 @@
     </div>
 
     <div class="col-md-3 no-float">
-      <app-categories></app-categories>
+      <app-categories (categorySelect)="categoryChange($event);"></app-categories>
     </div>
   </div>
 </div>
-

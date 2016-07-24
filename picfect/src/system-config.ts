@@ -8,13 +8,15 @@
 /** Map relative paths to URLs. */
 const map: any = {
   '@angular2-material': 'vendor/@angular2-material',
-  'angular2-jwt': 'vendor/angular2-jwt'
+  'angular2-jwt': 'vendor/angular2-jwt',
+  'ng2-facebook-sdk': 'vendor/ng2-facebook-sdk'
 };
 
 /** User packages configuration. */
 const packages: any = {
   'angularfire2': {main: 'angularfire2.js'},
   'angular2-jwt': {main: 'angular2-jwt.js'},
+  'ng2-facebook-sdk': {main: 'ng2-facebook-sdk.js'},
 };
 const materialPkgs:string[] = [
   'core',
