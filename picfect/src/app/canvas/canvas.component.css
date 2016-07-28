@@ -10,8 +10,8 @@ md-card-actions{
     margin-top: 20px;
 }
 md-card img{
-    /*width: 250px;
-    height: 250px;*/
+    max-width: 250px;
+    max-height: 250px;
 }
 .btn-primary{
     background-color: #30414A;

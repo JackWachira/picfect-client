@@ -9,7 +9,8 @@
 const map: any = {
   '@angular2-material': 'vendor/@angular2-material',
   'angular2-jwt': 'vendor/angular2-jwt',
-  'ng2-facebook-sdk': 'vendor/ng2-facebook-sdk'
+  'ng2-facebook-sdk': 'vendor/ng2-facebook-sdk',
+  'ng2-uploader': 'vendor/ng2-uploader',
 };
 
 /** User packages configuration. */
@@ -17,6 +18,7 @@ const packages: any = {
   'angularfire2': {main: 'angularfire2.js'},
   'angular2-jwt': {main: 'angular2-jwt.js'},
   'ng2-facebook-sdk': {main: 'ng2-facebook-sdk.js'},
+  'ng2-uploader': {main: 'ng2-uploader.js'},
 };
 const materialPkgs:string[] = [
   'core',

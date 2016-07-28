@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {GalleryService} from './gallery.service';
 import {GalleryItem} from './galleryitem';
@@ -20,6 +20,7 @@ export class GalleryComponent implements OnInit {
   @Input() galleryItem: GalleryItem[];
   @Input() categoryId = 0;
   @Input() categoryName = "";
+  @Output() imageSelect = new EventEmitter();
   constructor(private galleryService: GalleryService) { }
 
   ngOnInit() {
@@ -33,13 +34,10 @@ export class GalleryComponent implements OnInit {
   onReceiveImages(images: any) {
     this.galleryItem = images;
   }
-  pictures: Object[] = [
-    { name: "DSC6324.JPG" },
-    { name: "DSC6234.JPG" },
-    { name: "DSC8346.JPG" },
-    { name: "DSC9027.JPG" },
-    { name: "DSC9237.JPG" },
-    { name: "DSC9372.JPG" }
-  ];
+  selectImage(image: GalleryItem){
+    this.imageSelect.emit({
+      value: image
+    });
+  }
 
 }

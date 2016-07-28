@@ -12,7 +12,8 @@ md-card {
     align-content: flex-start;
     border: 1px solid grey;
     border-width:thin;
-    height: 100%;
+    max-height: 507px;
+    overflow-y: scroll;
 }
 
 .md-card-content p{

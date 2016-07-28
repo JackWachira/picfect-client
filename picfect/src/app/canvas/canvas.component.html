@@ -1,5 +1,5 @@
 <md-card class="main-image">
-  <img class="img-responsive" md-card-image src="../img/beach.png">
+  <img *ngIf="selectedImage" class="img-responsive" md-card-image src={{selectedImage.original_image}}>
   <md-card-actions>
     <i class="material-icons md-36">rotate_left</i>
     <i class="material-icons md-36">flip</i>
@@ -14,6 +14,19 @@
   <button type="button" class="btn btn-primary btn-lg">
     <span class="glyphicon glyphicon-share"></span> SHARE
   </button>
+  <button (click)="uploader.queue[0].upload()" type="button" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-upload"></span> UPLOAD
+  </button>
+  <div class="content">
+    <label class="tag btn is-danger">
+            <i class="fa fa-upload icon is-small"></i> Choose file
+            <input type="file" [ng-file-select]="options" (onUpload)="handleUpload($event)">
+          </label>
+    <div class="progress">
+      <div class="progress-bar" [style.width]="basicProgress + '%'"></div>
+      <span class="percent">{{ uploadProgress }}%</span>
+    </div>
+  </div>
 </div>
 
 <div class="filter-container">
