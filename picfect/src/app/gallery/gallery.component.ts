@@ -4,6 +4,8 @@ import {GalleryService} from './gallery.service';
 import {GalleryItem} from './galleryitem';
 import { HTTP_PROVIDERS } from '@angular/http';
 import {CategoryPipe} from './filter.pipe';
+import {HomeService} from '../home/home.service';
+
 
 @Component({
   moduleId: module.id,
@@ -21,7 +23,12 @@ export class GalleryComponent implements OnInit {
   @Input() categoryId = 0;
   @Input() categoryName = "";
   @Output() imageSelect = new EventEmitter();
-  constructor(private galleryService: GalleryService) { }
+  constructor(private galleryService: GalleryService,private homeService: HomeService) { 
+    this.homeService.getChangeEmitter().subscribe(item => this.onItemAdded(item));
+  }
+  onItemAdded(item: GalleryItem){
+    this.galleryItem.push(item);
+  }
 
   ngOnInit() {
     this.galleryService.getRecentImages().subscribe(

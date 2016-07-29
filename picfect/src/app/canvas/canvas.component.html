@@ -1,35 +1,42 @@
 <md-card class="main-image">
-  <img *ngIf="selectedImage" class="img-responsive" md-card-image src={{selectedImage.original_image}}>
+  <div *ngIf="selectedImage" class="images">
+    <img class="img-responsive" md-card-image src={{selectedImage.original_image}}>
+  </div>
+  <div *ngIf="!selectedImage" class="drop-image" [ng-file-drop]="options" (onUpload)="handleDropUpload($event)">
+    <span>Drop files here</span>
+    <p>or</p>
+    <button>SELECT FILE</button>
+  </div>
+  <div class="progress">
+    <div class="progress-bar" [style.width]="dropProgress + '%'"></div>
+    <span class="percent">{{ dropProgress }}%</span>
+  </div>
   <md-card-actions>
-    <i class="material-icons md-36">rotate_left</i>
-    <i class="material-icons md-36">flip</i>
-    <i class="material-icons md-36">crop</i>
+    <i class="material-icons md-24">rotate_left</i>
+    <i class="material-icons md-24">flip</i>
+    <i class="material-icons md-24">crop</i>
   </md-card-actions>
-</md-card>
-
-<div class="btn-operations">
-  <button type="button" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-floppy-saved"></span> SAVE
-  </button>
-  <button type="button" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-share"></span> SHARE
-  </button>
-  <button (click)="uploader.queue[0].upload()" type="button" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-upload"></span> UPLOAD
-  </button>
-  <div class="content">
-    <label class="tag btn is-danger">
-            <i class="fa fa-upload icon is-small"></i> Choose file
-            <input type="file" [ng-file-select]="options" (onUpload)="handleUpload($event)">
-          </label>
-    <div class="progress">
-      <div class="progress-bar" [style.width]="basicProgress + '%'"></div>
-      <span class="percent">{{ uploadProgress }}%</span>
+  <div style="float:right;">
+    <i class="fa fa-share-square fa-2x" aria-hidden="true"></i>
+    <i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
+  </div>
+  <div class="btn-operations">
+    <div class="content">
+      <label class="file-upload-label">
+        <input type="file" [ng-file-select]="options" (onUpload)="handleUpload($event)">
+        <span class="glyphicon glyphicon-folder-open" aria-hidden="true" ></span>Select Image
+      </label>
+      <div  class="progress">
+        <div class="progress-bar"  [style.width]="uploadProgress + '%'"></div>
+        <span  class="percent">{{ uploadProgress }}%</span>
+      </div>
     </div>
   </div>
-</div>
+</md-card>
 
-<div class="filter-container">
+
+
+<div *ngIf="imageUploaded" class="filter-container">
   <div *ngFor="let filter of filters" class="filters">
     <img src="../img/beach.png">
     <p>{{filter.name}}</p>

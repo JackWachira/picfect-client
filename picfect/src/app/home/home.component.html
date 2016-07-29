@@ -4,14 +4,14 @@
   <span id="user-name">Jack Mwangi</span>
   <img class="img-circle" src="/img/user_white.png">
 </md-toolbar>
-<div class="container">
-  <div class="row" style="background-color: #F5F8FA;">
+<div class="container" >
+  <div class="row">
     <div class="col-md-3 no-float">
       <app-gallery [categoryId]="categoryId" [categoryName]="categoryName" (imageSelect)="imageSelect($event);"></app-gallery>
     </div>
 
     <div class="col-md-6 no-float">
-      <app-canvas [selectedImage]="selectedImage"></app-canvas>
+      <app-canvas (imageReady)="imageReady($event);" [selectedImage]="selectedImage"></app-canvas>
     </div>
 
     <div class="col-md-3 no-float">

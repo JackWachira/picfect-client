@@ -1,13 +1,15 @@
 .main-image{
     width: 400px;
-    height: 350px;
+    height: 400px;
     margin: 30px auto;
     box-shadow: 0 10px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 md-card-actions{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 2px;
+    padding: 4px 0;
+    margin-bottom: 5px;        
 }
 md-card img{
     max-width: 250px;
@@ -42,6 +44,71 @@ md-card img{
     white-space: nowrap;
     border-width:thin;
     overflow:auto;
-    margin-top: 10px;
+    margin-top: 30px;
     padding: 10px;
+}
+.drop-image{
+    border: 1px dotted grey;
+    width: 350px;
+    height: 250px;
+    background: #F1F1F1;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+.drop-image span{
+    font-family: 'Open Sans', sans-serif;
+    color: #A0A8B3;
+    font-size: 20px;
+}
+.drop-image p{
+    font-family: 'Open Sans', sans-serif;
+    color: #A0A8B3;
+    font-size: 15px;
+}
+label.file-upload-label input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+.file-upload-label {
+    width: 150px;
+    height: 28px;
+    border-radius: 4px;
+    background: #000000;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    padding-top: 5px;
+    margin-left: 15%;
+}
+.file-upload-label:hover {
+    background: #000000;
+}
+.file-upload-label:active {
+    background: #f9f9f9;
+}
+.file-upload-label :valid + span {
+    color: #ffffff;
+}
+.glyphicon-folder-open{
+    margin-right: 10px;
+}
+.progress {
+    margin-bottom: 0px;
+}
+.images{
+    display:inline-block;
+    width:300px;
+    height:250px;
+    overflow:hidden;
+    position: relative;
+    margin: 0 auto;
+}
+.img-responsive{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
 }
