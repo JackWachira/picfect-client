@@ -2,7 +2,9 @@ import { Component, OnInit, Input, NgZone, Output, EventEmitter } from '@angular
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {GalleryItem} from '../gallery/galleryitem';
 import {UPLOAD_DIRECTIVES} from 'ng2-uploader/ng2-uploader';
-import {HomeService} from '../home/home.service'
+import {HomeService} from '../home/home.service';
+import {CanvasService} from '../canvas/canvas.service';
+import {Filters} from './filters';
 
 const URL = 'http://localhost:8000/api/images/3';
 @Component({
@@ -10,7 +12,8 @@ const URL = 'http://localhost:8000/api/images/3';
   selector: 'app-canvas',
   templateUrl: 'canvas.component.html',
   styleUrls: ['canvas.component.css'],
-  directives: [UPLOAD_DIRECTIVES, MD_CARD_DIRECTIVES]
+  directives: [UPLOAD_DIRECTIVES, MD_CARD_DIRECTIVES],
+  providers: [CanvasService]
 })
 export class CanvasComponent implements OnInit {
   @Input() selectedImage: GalleryItem;
@@ -21,26 +24,28 @@ export class CanvasComponent implements OnInit {
   uploadResponse: Object;
   dropProgress: number = 0;
   dropResp: any[] = [];
-  constructor(private homeService: HomeService) {
+  filters : Filters;
+  constructor(private homeService: HomeService, private canvasService: CanvasService) {
     this.uploadProgress = 0;
     this.uploadResponse = {};
     this.zone = new NgZone({ enableLongStackTrace: false });
     this.imageUploaded = false;
   }
+  getThumbnails(imageId:number){
+    this.canvasService.getThumbnails(imageId).subscribe(
+      data => this.onReceiveThumbnails(data),
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  onReceiveThumbnails(data){
+    this.filters = data;
+  }
 
-  filters: Object[] = [
-    { name: "Contrast" },
-    { name: "Grayscale" },
-    { name: "Invert" },
-    { name: "Detail" },
-    { name: "Emboss" },
-    { name: "Emboss" },
-    { name: "Emboss" },
-    { name: "Emboss" },
-  ];
   options: Object = {
     url: URL,
-    withCredentials: true,
+    // withCredentials: true,
     authToken: localStorage.getItem('id_token'),
     authTokenPrefix: "Bearer facebook ",
     fieldName: 'original_image'
@@ -61,10 +66,11 @@ export class CanvasComponent implements OnInit {
       this.imageUploaded = true;
       // this.uploadFile = null;
       this.homeService.add(data);
+      this.getThumbnails(data.id);
     }
   }
   loadFilters(){
-    
+
   }
   handleDropUpload(data): void {
     let index = this.dropResp.findIndex(x => x.id === data.id);
