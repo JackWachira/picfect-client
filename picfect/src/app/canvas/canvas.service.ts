@@ -13,7 +13,7 @@ export class CanvasService {
         this.url = environment.url;
     }
 
-    // Api call to fetch all bucketlists
+    // Api call to fetch thumbnails
     getThumbnails(imageId: number): Observable<GalleryItem[]> {
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');

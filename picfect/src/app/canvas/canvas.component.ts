@@ -5,6 +5,7 @@ import {UPLOAD_DIRECTIVES} from 'ng2-uploader/ng2-uploader';
 import {HomeService} from '../home/home.service';
 import {CanvasService} from '../canvas/canvas.service';
 import {Filters} from './filters';
+import { environment } from '../environment';
 
 const URL = 'http://localhost:8000/api/images/3';
 @Component({
@@ -24,14 +25,16 @@ export class CanvasComponent implements OnInit {
   uploadResponse: Object;
   dropProgress: number = 0;
   dropResp: any[] = [];
-  filters : Filters;
+  filters: Filters;
+  url = "";
   constructor(private homeService: HomeService, private canvasService: CanvasService) {
     this.uploadProgress = 0;
     this.uploadResponse = {};
     this.zone = new NgZone({ enableLongStackTrace: false });
     this.imageUploaded = false;
+    this.url = environment.url;
   }
-  getThumbnails(imageId:number){
+  getThumbnails(imageId: number) {
     this.canvasService.getThumbnails(imageId).subscribe(
       data => this.onReceiveThumbnails(data),
       err => {
@@ -39,7 +42,7 @@ export class CanvasComponent implements OnInit {
       }
     );
   }
-  onReceiveThumbnails(data){
+  onReceiveThumbnails(data) {
     this.filters = data;
   }
 
@@ -54,6 +57,17 @@ export class CanvasComponent implements OnInit {
   ngOnInit() {
 
   }
+  applyFilter(filter: Filters) {
+    this.selectedImage = new GalleryItem();
+    this.selectedImage.id = filter.id;
+    this.selectedImage.name = "";
+    this.selectedImage.original_image = this.url + filter.name;
+    this.selectedImage.edited_image = "";
+    this.selectedImage.date_created = "";
+    this.selectedImage.date_modified = "";
+    this.selectedImage.category = 1;
+    this.selectedImage.uploader_id = 1;
+  }
   handleUpload(data): void {
     this.uploadFile = data;
     this.zone.run(() => {
@@ -65,10 +79,11 @@ export class CanvasComponent implements OnInit {
       this.uploadFile = data;
       this.imageUploaded = true;
       // this.uploadFile = null;
+      this.selectedImage = data;
       this.homeService.add(data);
       this.getThumbnails(data.id);
     }
-  }
+  } 
   loadFilters(){
 
   }

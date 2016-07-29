@@ -37,8 +37,8 @@
 
 
 <div *ngIf="imageUploaded" class="filter-container">
-  <div *ngFor="let filter of filters" class="filters">
-    <img src="http://localhost:8000{{filter.name}}">
+  <div (click)="applyFilter(filter)" *ngFor="let filter of filters" class="filters">
+    <img src="http://localhost:8000/{{filter.name}}">
     <p>{{filter.effect}}</p>
   </div>
 </div>

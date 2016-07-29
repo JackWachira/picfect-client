@@ -15,7 +15,7 @@ export class GalleryService {
         this.url = environment.url;
     }
 
-    // Api call to fetch all bucketlists
+    // Api call to fetch recent images
     getRecentImages(): Observable<GalleryItem[]> {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
