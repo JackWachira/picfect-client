@@ -3,7 +3,7 @@ import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {GalleryService} from './gallery.service';
 import {GalleryItem} from './galleryitem';
 import { HTTP_PROVIDERS } from '@angular/http';
-import {CategoryPipe} from './filter.pipe';
+import {CategoryPipe, OrderPipe} from './filter.pipe';
 import {HomeService} from '../home/home.service';
 
 
@@ -16,7 +16,7 @@ import {HomeService} from '../home/home.service';
     MD_CARD_DIRECTIVES,
   ],
   providers: [GalleryService, HTTP_PROVIDERS],
-  pipes: [CategoryPipe]
+  pipes: [CategoryPipe, OrderPipe]
 })
 export class GalleryComponent implements OnInit {
   @Input() galleryItem: GalleryItem[];
