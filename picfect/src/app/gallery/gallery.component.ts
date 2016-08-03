@@ -42,6 +42,7 @@ export class GalleryComponent implements OnInit {
     this.galleryItem = images;
   }
   selectImage(image: GalleryItem){
+    this.homeService.triggerThumbnails(image);
     this.imageSelect.emit({
       value: image
     });

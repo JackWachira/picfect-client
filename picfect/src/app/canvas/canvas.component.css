@@ -112,3 +112,16 @@ label.file-upload-label input[type="file"] {
     transform: translate(-50%, -50%);
     
 }
+a {
+  color: red;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.fa {
+  padding-right: 5px;
+}
+a:hover .fa {
+  color: blue;
+}

@@ -23,4 +23,14 @@ export class CanvasService {
         })
             .map(res => res.json());
     }
+    // Api call to fetch thumbnails
+    saveEffect(thumbId: number, categoryId: number): Observable<GalleryItem[]> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
+        return this.http.post(this.url + 'api/images/' + categoryId + '/edits/' + thumbId + '/', null, {
+            headers: headers
+        })
+            .map(res => res.json());
+    }
 }

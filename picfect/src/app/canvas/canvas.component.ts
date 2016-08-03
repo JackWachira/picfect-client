@@ -26,6 +26,7 @@ export class CanvasComponent implements OnInit {
   dropProgress: number = 0;
   dropResp: any[] = [];
   filters: Filters;
+  selectedFilter: Filters;
   url = "";
   constructor(private homeService: HomeService, private canvasService: CanvasService) {
     this.uploadProgress = 0;
@@ -33,6 +34,11 @@ export class CanvasComponent implements OnInit {
     this.zone = new NgZone({ enableLongStackTrace: false });
     this.imageUploaded = false;
     this.url = environment.url;
+    this.homeService.getTriggerEmitter().subscribe(item => this.onTriggerThumbnail(item));
+  }
+  onTriggerThumbnail(item: GalleryItem) {
+    this.imageUploaded = true;
+    this.getThumbnails(item.id);
   }
   getThumbnails(imageId: number) {
     this.canvasService.getThumbnails(imageId).subscribe(
@@ -58,6 +64,7 @@ export class CanvasComponent implements OnInit {
 
   }
   applyFilter(filter: Filters) {
+    this.selectedFilter = filter;
     this.selectedImage = new GalleryItem();
     this.selectedImage.id = filter.id;
     this.selectedImage.name = "";
@@ -67,6 +74,27 @@ export class CanvasComponent implements OnInit {
     this.selectedImage.date_modified = "";
     this.selectedImage.category = 1;
     this.selectedImage.uploader_id = 1;
+  }
+  shareImage() {
+    // console.log(this.selectedImage.original_image);
+
+    FB.ui({
+      method: 'share',
+      href: 'http://www.freedigitalphotos.net/images/img/homepage/87357.jpg',
+    }, function (response) { });
+  }
+  saveEffect() {
+    console.log(this.selectedFilter.id);
+
+    this.canvasService.saveEffect(this.selectedFilter.id, this.selectedImage.category).subscribe(
+      data => this.onSaveEffect(data),
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  onSaveEffect(data) {
+    this.homeService.add(data);
   }
   handleUpload(data): void {
     this.uploadFile = data;
@@ -78,13 +106,12 @@ export class CanvasComponent implements OnInit {
       data = JSON.parse(data.response);
       this.uploadFile = data;
       this.imageUploaded = true;
-      // this.uploadFile = null;
       this.selectedImage = data;
       this.homeService.add(data);
       this.getThumbnails(data.id);
     }
-  } 
-  loadFilters(){
+  }
+  loadFilters() {
 
   }
   handleDropUpload(data): void {

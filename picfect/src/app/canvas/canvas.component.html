@@ -17,8 +17,9 @@
     <i class="material-icons md-24">crop</i>
   </md-card-actions>
   <div style="float:right;">
-    <i class="fa fa-share-square fa-2x" aria-hidden="true"></i>
-    <i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
+    <i (click)="shareImage()" class="fa fa-share-square fa-2x" aria-hidden="true"></i>
+     <a *ngIf="selectedImage" href="{{selectedImage.original_image}}" download="image.png"><span class="fa fa-cloud-download fa-2x"></span></a>
+    <i (click)="saveEffect()" class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
   </div>
   <div class="btn-operations">
     <div class="content">
@@ -26,9 +27,9 @@
         <input type="file" [ng-file-select]="options" (onUpload)="handleUpload($event)">
         <span class="glyphicon glyphicon-folder-open" aria-hidden="true" ></span>Select Image
       </label>
-      <div  class="progress">
-        <div class="progress-bar"  [style.width]="uploadProgress + '%'"></div>
-        <span  class="percent">{{ uploadProgress }}%</span>
+      <div class="progress">
+        <div class="progress-bar" [style.width]="uploadProgress + '%'"></div>
+        <span class="percent">{{ uploadProgress }}%</span>
       </div>
     </div>
   </div>
