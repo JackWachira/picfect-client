@@ -2,7 +2,7 @@
     width: 400px;
     height: 400px;
     margin: 30px auto;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 5px 15px 4px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 md-card-actions{
@@ -54,19 +54,19 @@ md-card img{
     background: #F1F1F1;
     text-align: center;
     vertical-align: middle;
-    display: table-cell;
-}
-.drop-image span{
-    font-family: 'Open Sans', sans-serif;
-    color: #A0A8B3;
-    font-size: 20px;
+    
 }
 .drop-image p{
     font-family: 'Open Sans', sans-serif;
     color: #A0A8B3;
     font-size: 15px;
 }
-label.file-upload-label input[type="file"] {
+.drop-image p{
+    font-family: 'Open Sans', sans-serif;
+    color: #A0A8B3;
+    font-size: 15px;
+}
+label.file-upload-label input {
     position: fixed;
     top: -1000px;
 }
@@ -98,22 +98,24 @@ label.file-upload-label input[type="file"] {
     margin-bottom: 0px;
 }
 .images{
-    display:inline-block;
     width:300px;
     height:250px;
     overflow:hidden;
     position: relative;
     margin: 0 auto;
+    text-align: center;
 }
 .img-responsive{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
+    margin: 0 auto;
+}
+[md-card-image]:first-child {
+    margin-top: 0;
 }
 a {
-  color: red;
   text-decoration: none;
 }
 a:hover {
@@ -123,5 +125,28 @@ a:hover {
   padding-right: 5px;
 }
 a:hover .fa {
-  color: blue;
+}
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   margin: 0 auto;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   color: white;
+   height: 29px;
+   padding: 5px;
+   width: 268px;
+}
+.grey{ background-color: #30414A;; }
+.blue select{ color: #fff; }
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
 }

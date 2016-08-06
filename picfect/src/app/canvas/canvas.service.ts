@@ -33,4 +33,14 @@ export class CanvasService {
         })
             .map(res => res.json());
     }
+    // Api call to update image    
+    updateImage(imageId: number, categoryId: number): Observable<GalleryItem> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
+        return this.http.put(this.url + 'api/images/' + imageId + '/', JSON.stringify({ "category": categoryId }), {
+            headers: headers
+        })
+            .map(res => res.json());
+    }
 }

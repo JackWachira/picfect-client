@@ -19,7 +19,9 @@ module.exports = function(defaults) {
       '@angular2-material/**/*',
       'angular2-jwt/**/*.+(js|js.map)',
       'ng2-facebook-sdk/dist/**/*.+(js|js.map)',
-      'ng2-uploader/**/*.+(js|js.map)'
+      'ng2-uploader/**/*.+(js|js.map)',
+      'ng2-image-lazy-load/**/*.+(js|js.map)',
+      'ng2-toasty/**/*',
     ]
   });
 };

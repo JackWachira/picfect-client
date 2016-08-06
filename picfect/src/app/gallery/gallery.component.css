@@ -12,18 +12,24 @@ md-card {
     align-content: flex-start;
     border: 1px solid grey;
     border-width:thin;
-    max-height: 507px;
+    height: 507px;
     overflow-y: scroll;
+    padding-left: 15px;
 }
 
 .md-card-content p{
     text-align: center;
 }
 
-.card-container label{
+label{
     border: 1px solid grey;
     width: 100%;
     border-width:thin;
     text-align: center;
-    background: #D8D8D8;
+    background: #30414A;
+    color: white;
+}
+md-progress-circle{
+    text-align: center;
+    vertical-align: middle;    
 }

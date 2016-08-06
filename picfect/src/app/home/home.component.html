@@ -7,7 +7,7 @@
 <div class="container" >
   <div class="row">
     <div class="col-md-3 no-float">
-      <app-gallery [categoryId]="categoryId" [categoryName]="categoryName" (imageSelect)="imageSelect($event);"></app-gallery>
+      <app-gallery [categoryName]="categoryName" (imageSelect)="imageSelect($event);"></app-gallery>
     </div>
 
     <div class="col-md-6 no-float">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="col-md-3 no-float">
-      <app-categories (categorySelect)="categoryChange($event);"></app-categories>
+      <app-categories ></app-categories>
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
+<label *ngIf="!categoryName">Recent uploads</label>
+<label *ngIf="categoryName">{{categoryName}}</label>
 <div class="card-container">
-    <label *ngIf="!categoryName">Recent uploads</label>
-    <label *ngIf="categoryName">{{categoryName}}</label>
-    <md-card (click)="selectImage(pic)" *ngFor="let pic of galleryItem | categoryfilter:categoryId | sortfilter: categoryId">
-        <img md-card-image [alt]="pic.name" src={{pic.original_image}}>
-    </md-card>
+  <md-card imageLazyLoadArea (click)="selectImage(pic)" *ngFor="let pic of galleryItem | categoryfilter:categoryId | sortfilter: categoryId">
+    <img md-card-image [alt]="pic.name" src={{pic.original_image}}>
+  </md-card>
 </div>

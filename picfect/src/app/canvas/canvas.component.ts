@@ -6,6 +6,8 @@ import {HomeService} from '../home/home.service';
 import {CanvasService} from '../canvas/canvas.service';
 import {Filters} from './filters';
 import { environment } from '../environment';
+import {CategoryComponent} from '../category/category.component';
+import {CategoryItem} from '../category/categoryitem';
 
 const URL = 'http://localhost:8000/api/images/3';
 @Component({
@@ -20,25 +22,38 @@ export class CanvasComponent implements OnInit {
   @Input() selectedImage: GalleryItem;
   @Input() imageUploaded: boolean;
   @Output() imageReady = new EventEmitter();
+  @Input() categoryId: number = 0;
+  @Input() options: Object = {
+    url: 'http://localhost:8000/api/images/',
+    // withCredentials: true,
+    authToken: localStorage.getItem('id_token'),
+    authTokenPrefix: "Bearer facebook ",
+    fieldName: 'original_image'
+  };
   uploadFile: any;
+  imageDropped = false;
   uploadProgress: number;
   uploadResponse: Object;
   dropProgress: number = 0;
   dropResp: any[] = [];
   filters: Filters;
   selectedFilter: Filters;
-  url = "";
+  server_url = "";
   constructor(private homeService: HomeService, private canvasService: CanvasService) {
     this.uploadProgress = 0;
     this.uploadResponse = {};
     this.zone = new NgZone({ enableLongStackTrace: false });
     this.imageUploaded = false;
-    this.url = environment.url;
+    this.server_url = environment.url;
     this.homeService.getTriggerEmitter().subscribe(item => this.onTriggerThumbnail(item));
+    this.homeService.getCategoryEmitter().subscribe(item => this.onCategoryChanged(item));
   }
   onTriggerThumbnail(item: GalleryItem) {
     this.imageUploaded = true;
     this.getThumbnails(item.id);
+  }
+  onCategoryChanged(item: CategoryItem) {
+    this.categoryId = item.id;
   }
   getThumbnails(imageId: number) {
     this.canvasService.getThumbnails(imageId).subscribe(
@@ -48,17 +63,26 @@ export class CanvasComponent implements OnInit {
       }
     );
   }
+  promptCategorySelect(){
+    console.log("Please select category first");
+     this.homeService.showToast();
+  }
   onReceiveThumbnails(data) {
     this.filters = data;
   }
+  updateImage(imageId, categoryId) {
+    this.canvasService.updateImage(imageId, categoryId).subscribe(
+      data => { 
+        this.homeService.add(data);
+        console.log(data);
+        
+       },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
-  options: Object = {
-    url: URL,
-    // withCredentials: true,
-    authToken: localStorage.getItem('id_token'),
-    authTokenPrefix: "Bearer facebook ",
-    fieldName: 'original_image'
-  };
   zone: NgZone;
   ngOnInit() {
 
@@ -68,7 +92,7 @@ export class CanvasComponent implements OnInit {
     this.selectedImage = new GalleryItem();
     this.selectedImage.id = filter.id;
     this.selectedImage.name = "";
-    this.selectedImage.original_image = this.url + filter.name;
+    this.selectedImage.original_image = this.server_url + filter.name;
     this.selectedImage.edited_image = "";
     this.selectedImage.date_created = "";
     this.selectedImage.date_modified = "";
@@ -76,16 +100,12 @@ export class CanvasComponent implements OnInit {
     this.selectedImage.uploader_id = 1;
   }
   shareImage() {
-    // console.log(this.selectedImage.original_image);
-
     FB.ui({
       method: 'share',
       href: 'http://www.freedigitalphotos.net/images/img/homepage/87357.jpg',
     }, function (response) { });
   }
   saveEffect() {
-    console.log(this.selectedFilter.id);
-
     this.canvasService.saveEffect(this.selectedFilter.id, this.selectedImage.category).subscribe(
       data => this.onSaveEffect(data),
       err => {
@@ -97,42 +117,25 @@ export class CanvasComponent implements OnInit {
     this.homeService.add(data);
   }
   handleUpload(data): void {
+    this.imageDropped = true;
     this.uploadFile = data;
     this.zone.run(() => {
       this.uploadProgress = data.progress.percent;
     });
 
     if (data && data.response) {
+
+      this.imageDropped = false;
+      this.uploadProgress = 0;
       data = JSON.parse(data.response);
       this.uploadFile = data;
       this.imageUploaded = true;
       this.selectedImage = data;
-      this.homeService.add(data);
+      this.updateImage(data.id, this.categoryId);
       this.getThumbnails(data.id);
     }
   }
   loadFilters() {
-
-  }
-  handleDropUpload(data): void {
-    let index = this.dropResp.findIndex(x => x.id === data.id);
-    if (index === -1) {
-      this.dropResp.push(data);
-    }
-    else {
-      this.zone.run(() => {
-        this.dropResp[index] = data;
-      });
-    }
-
-    let total = 0, uploaded = 0;
-    this.dropResp.forEach(resp => {
-      total += resp.progress.total;
-      uploaded += resp.progress.loaded;
-    });
-
-    this.dropProgress = Math.floor(uploaded / (total / 100));
-    this.imageUploaded = true;
 
   }
 

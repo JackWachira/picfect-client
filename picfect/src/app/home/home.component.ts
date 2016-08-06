@@ -3,7 +3,9 @@ import {GalleryComponent} from '../gallery';
 import {CategoryComponent} from '../category';
 import {CanvasComponent} from '../canvas';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {GalleryItem} from '../gallery/galleryitem'
+import {GalleryItem} from '../gallery/galleryitem';
+
+
 
 
 @Component({
@@ -20,10 +22,6 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-  }
-  categoryChange(event) {
-    this.categoryId = event.value['categoryId'];
-    this.categoryName = event.value['categoryName'];
   }
   imageSelect(event) {
     this.selectedImage = event.value;
