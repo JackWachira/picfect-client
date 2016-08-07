@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, NgZone, Output, EventEmitter } from '@angular/core';
+/// <reference path='../../../typings/jquery/jquery.d.ts'/>
+
+import { Component, OnInit, AfterViewInit, Input, NgZone, Output, EventEmitter } from '@angular/core';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {GalleryItem} from '../gallery/galleryitem';
 import {UPLOAD_DIRECTIVES} from 'ng2-uploader/ng2-uploader';
@@ -8,6 +10,9 @@ import {Filters} from './filters';
 import { environment } from '../environment';
 import {CategoryComponent} from '../category/category.component';
 import {CategoryItem} from '../category/categoryitem';
+import {EffectsPipe} from './effects.pipe';
+declare var $: JQueryStatic;
+
 
 const URL = 'http://localhost:8000/api/images/3';
 @Component({
@@ -16,10 +21,12 @@ const URL = 'http://localhost:8000/api/images/3';
   templateUrl: 'canvas.component.html',
   styleUrls: ['canvas.component.css'],
   directives: [UPLOAD_DIRECTIVES, MD_CARD_DIRECTIVES],
-  providers: [CanvasService]
+  providers: [CanvasService],
+  pipes: [EffectsPipe]
 })
-export class CanvasComponent implements OnInit {
+export class CanvasComponent implements OnInit, AfterViewInit {
   @Input() selectedImage: GalleryItem;
+  @Input() selectedImageProperties: GalleryItem;
   @Input() imageUploaded: boolean;
   @Output() imageReady = new EventEmitter();
   @Input() categoryId: number = 0;
@@ -39,6 +46,7 @@ export class CanvasComponent implements OnInit {
   filters: Filters;
   selectedFilter: Filters;
   server_url = "";
+
   constructor(private homeService: HomeService, private canvasService: CanvasService) {
     this.uploadProgress = 0;
     this.uploadResponse = {};
@@ -47,6 +55,21 @@ export class CanvasComponent implements OnInit {
     this.server_url = environment.url;
     this.homeService.getTriggerEmitter().subscribe(item => this.onTriggerThumbnail(item));
     this.homeService.getCategoryEmitter().subscribe(item => this.onCategoryChanged(item));
+  }
+  showDetails(item: GalleryItem) {
+    var self = this;
+    this.selectedImageProperties = item;
+    this.selectedImageProperties.name = item.original_image.substring(item.original_image.lastIndexOf('/') + 1, item.original_image.length)
+    var img = new Image();
+    img.onload = function () {
+      self.selectedImageProperties.size = this.width + 'x' + this.height;
+    }
+    img.src = item.original_image;
+    this.selectedImageProperties.date_created = item.date_created
+    this.selectedImageProperties.date_modified = item.date_modified
+    this.selectedImageProperties.uploader = item.uploader
+
+
   }
   onTriggerThumbnail(item: GalleryItem) {
     this.imageUploaded = true;
@@ -63,20 +86,29 @@ export class CanvasComponent implements OnInit {
       }
     );
   }
-  promptCategorySelect(){
-    console.log("Please select category first");
-     this.homeService.showToast();
+
+  ngAfterViewInit() {
+    $(function () {
+      $("h2")
+        .wrapInner("<span>")
+      $("h2 br")
+        .before("<span class='spacer'>")
+        .after("<span class='spacer'>");
+    });
+  }
+  promptCategorySelect() {
+    this.homeService.showToast();
   }
   onReceiveThumbnails(data) {
     this.filters = data;
+    
   }
   updateImage(imageId, categoryId) {
     this.canvasService.updateImage(imageId, categoryId).subscribe(
-      data => { 
+      data => {
         this.homeService.add(data);
-        console.log(data);
-        
-       },
+
+      },
       err => {
         console.log(err);
       }
@@ -87,6 +119,33 @@ export class CanvasComponent implements OnInit {
   ngOnInit() {
 
   }
+  transformImage(tranformation: string) {
+    if (tranformation == "flip") {
+      this.selectedImage = new GalleryItem();
+      this.selectedImage.id = this.filters[10].id;
+      this.selectedImage.name = "";
+      this.selectedImage.original_image = this.server_url + this.filters[10].name;
+      this.selectedImage.edited_image = "";
+      this.selectedImage.date_created = "";
+      this.selectedImage.date_modified = "";
+      this.selectedImage.category = this.categoryId;
+      this.selectedImage.uploader = 1;
+    } else {
+      this.selectedImage = new GalleryItem();
+      this.selectedImage.id = this.filters[8].id;
+      this.selectedImage.name = "";
+      this.selectedImage.original_image = this.server_url + this.filters[8].name;
+      this.selectedImage.edited_image = "";
+      this.selectedImage.date_created = "";
+      this.selectedImage.date_modified = "";
+      this.selectedImage.category = this.categoryId;
+      this.selectedImage.uploader = 1;
+    }
+  }
+  openFile(e) {
+    e.preventDefault();
+    $("#upload").trigger('click');
+  }
   applyFilter(filter: Filters) {
     this.selectedFilter = filter;
     this.selectedImage = new GalleryItem();
@@ -96,8 +155,8 @@ export class CanvasComponent implements OnInit {
     this.selectedImage.edited_image = "";
     this.selectedImage.date_created = "";
     this.selectedImage.date_modified = "";
-    this.selectedImage.category = 1;
-    this.selectedImage.uploader_id = 1;
+    this.selectedImage.category = this.categoryId;
+    this.selectedImage.uploader = 1;
   }
   shareImage() {
     FB.ui({

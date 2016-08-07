@@ -6,5 +6,6 @@ export class GalleryItem {
   date_created: string;
   date_modified: string;
   category: number;
-  uploader_id: number;
+  uploader: number;
+  size: string;
 }

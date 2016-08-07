@@ -2,9 +2,14 @@
   <span>Picfect</span>
   <span class="fill-space"></span>
   <span id="user-name">Jack Mwangi</span>
-  <img class="img-circle" src="/img/user_white.png">
+  <div class="dropdown pull-right">
+    <img class="img-circle dropdown-toggle" data-toggle="dropdown" src="/img/user_white.png">    
+    <ul class="dropdown-menu">
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </div>
 </md-toolbar>
-<div class="container" >
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3 no-float">
       <app-gallery [categoryName]="categoryName" (imageSelect)="imageSelect($event);"></app-gallery>
@@ -15,7 +20,7 @@
     </div>
 
     <div class="col-md-3 no-float">
-      <app-categories ></app-categories>
+      <app-categories></app-categories>
     </div>
   </div>
 </div>

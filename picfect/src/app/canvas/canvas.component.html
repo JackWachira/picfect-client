@@ -1,20 +1,26 @@
 <md-card class="main-image">
-  <div *ngIf="selectedImage" class="images">
+  <div *ngIf="selectedImage" on-mouseover='showDetails(selectedImage)' class="images">
     <img class="img-responsive" md-card-image src={{selectedImage.original_image}}>
+    <div *ngIf="selectedImageProperties" class="overlay">
+      <p>Name: {{selectedImageProperties.name}}</p>
+      <p>Size: {{selectedImageProperties.size}}</p>
+      <p>Uploader: {{selectedImageProperties.uploader}}</p>
+      <p>Date Created: {{selectedImageProperties.date_created}}</p>
+      <p>Date Modified: {{selectedImageProperties.date_modified}}</p>
+    </div>
   </div>
   <div *ngIf="!selectedImage" class="drop-image" [ng-file-drop]="options" (onUpload)="handleUpload($event)">
-    <img src="../img/cloud_upload.png">
-    <p>Drag & Drop images here or <a><b>Choose a file</b></a> </p>
+    <img src="../img/cloud_upload.png">  
+    <p>Drag & Drop images here or <a id="upload_link" (click)="openFile($event)"><b>Select an image</b></a> </p>
   </div>
   <md-card-actions>
-    <i class="material-icons md-24">rotate_left</i>
-    <i class="material-icons md-24">flip</i>
-    <i class="material-icons md-24">crop</i>
+    <i (click)="transformImage('flip')" class="material-icons md-24">transform</i>
+    <i (click)="transformImage('mirror')" class="material-icons md-24">flip</i>
   </md-card-actions>
   <div style="float:right;">
-    <i (click)="shareImage()" class="fa fa-share-square fa-2x" aria-hidden="true"></i>
+    <i (click)="shareImage()" style="color: #73AFAD;" class="fa fa-share-square fa-2x" aria-hidden="true"></i>
     <a *ngIf="selectedImage" href="{{selectedImage.original_image}}" download="image.png"><span class="fa fa-cloud-download fa-2x"></span></a>
-    <i (click)="saveEffect()" class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
+    <i (click)="saveEffect()" style="color: #73AFAD;" class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
   </div>
   <div class="btn-operations">
     <div class="content">
@@ -23,7 +29,7 @@
         <span class="glyphicon glyphicon-folder-open" aria-hidden="true" ></span>Select Image
       </label>
       <label *ngIf="categoryId==0" class="file-upload-label">
-        <input  (click)="promptCategorySelect()">
+        <input id="upload" (click)="promptCategorySelect()">
         <span class="glyphicon glyphicon-folder-open" aria-hidden="true" ></span>Select Image
       </label>
       <div *ngIf="imageDropped" class="progress">
@@ -35,7 +41,7 @@
 </md-card>
 
 <div *ngIf="imageUploaded" class="filter-container">
-  <div (click)="applyFilter(filter)" *ngFor="let filter of filters" class="filters">
+  <div (click)="applyFilter(filter)" *ngFor="let filter of filters | effectsfilter" class="filters">
     <img src="http://localhost:8000/{{filter.name}}">
     <p>{{filter.effect}}</p>
   </div>
