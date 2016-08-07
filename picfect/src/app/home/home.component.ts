@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {GalleryComponent} from '../gallery';
 import {CategoryComponent} from '../category';
 import {CanvasComponent} from '../canvas';
@@ -20,14 +20,17 @@ export class HomeComponent implements OnInit {
   public categoryId = 0;
   public categoryName = "";
   public selectedImage: GalleryItem;
+  @Input() profName;
+  @Input() profPic;
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.profPic=localStorage.getItem('profPic');
+    this.profName=localStorage.getItem('profName');
   }
   imageSelect(event) {
     this.selectedImage = event.value;
     console.log(this.selectedImage);
-    
   }
   logout(){
     this.router.navigate(['']);

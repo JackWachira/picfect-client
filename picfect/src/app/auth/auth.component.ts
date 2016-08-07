@@ -29,11 +29,20 @@ export class AuthComponent implements AfterViewInit {
     $(this.el.nativeElement).delay(1000).animate({ "opacity": "1" }, 1700);
   }
   public login() {
-    this.fb.login().then(
+    this.fb.login({scope: 'public_profile', return_scopes: true}).then(
       (response: FacebookLoginResponse) => {
         console.log(response);
         status = response['status'];
+        var userId = response['authResponse'].userID;
+        
         if (status == 'connected') {
+          this.fb.api('/'+userId+ '/picture', 0).then((response: FacebookLoginResponse) => {
+            localStorage.setItem('profPic', response['data'].url);
+          });
+          this.fb.api('/'+userId, 0).then((response: FacebookLoginResponse) => {
+            localStorage.setItem('profName', name=response['name']);
+          });
+                    
           let access_token = response['authResponse']['accessToken'];
           localStorage.setItem('id_token', access_token);
           this.router.navigate(['/home']);

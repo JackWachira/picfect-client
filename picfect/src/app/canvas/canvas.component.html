@@ -2,6 +2,8 @@
   <div *ngIf="selectedImage" on-mouseover='showDetails(selectedImage)' class="images">
     <img class="img-responsive" md-card-image src={{selectedImage.original_image}}>
     <div *ngIf="selectedImageProperties" class="overlay">
+      <p><b>Image Details</b></p> 
+      <hr class="style14">    
       <p>Name: {{selectedImageProperties.name}}</p>
       <p>Size: {{selectedImageProperties.size}}</p>
       <p>Uploader: {{selectedImageProperties.uploader}}</p>

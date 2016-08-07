@@ -1,9 +1,9 @@
 <md-toolbar color="primary">
   <span>Picfect</span>
   <span class="fill-space"></span>
-  <span id="user-name">Jack Mwangi</span>
+  <span id="user-name">{{profName}}</span>
   <div class="dropdown pull-right">
-    <img class="img-circle dropdown-toggle" data-toggle="dropdown" src="/img/user_white.png">    
+    <img class="img-circle dropdown-toggle" data-toggle="dropdown" alt="/img/user_white.png" src={{profPic}}>    
     <ul class="dropdown-menu">
       <li><a (click)="logout()">Logout</a></li>
     </ul>

@@ -62,14 +62,20 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.selectedImageProperties.name = item.original_image.substring(item.original_image.lastIndexOf('/') + 1, item.original_image.length)
     var img = new Image();
     img.onload = function () {
-      self.selectedImageProperties.size = this.width + 'x' + this.height;
+      self.selectedImageProperties.size = this.width + ' x ' + this.height + ' px';
     }
     img.src = item.original_image;
-    this.selectedImageProperties.date_created = item.date_created
-    this.selectedImageProperties.date_modified = item.date_modified
-    this.selectedImageProperties.uploader = item.uploader
-
-
+    this.selectedImageProperties.date_created = this.getSimpleDate(item.date_created);
+    this.selectedImageProperties.date_modified = this.getSimpleDate(item.date_modified);
+    this.selectedImageProperties.uploader = localStorage.getItem('profName')
+  }
+  getSimpleDate(dateString: any) {
+    var date = new Date(dateString);
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var dateStr = month + "/" + day + "/" + year;
+    return dateStr;
   }
   onTriggerThumbnail(item: GalleryItem) {
     this.imageUploaded = true;
@@ -101,7 +107,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
   onReceiveThumbnails(data) {
     this.filters = data;
-    
+
   }
   updateImage(imageId, categoryId) {
     this.canvasService.updateImage(imageId, categoryId).subscribe(
