@@ -47,7 +47,9 @@ md-card img{
     padding: 10px;
 }
 .drop-image{
-    border: 1px dotted grey;
+    /*border: 1px dotted grey;
+    */
+    border: 3px dashed #ccc;
     width: 350px;
     height: 250px;
     text-align: center;

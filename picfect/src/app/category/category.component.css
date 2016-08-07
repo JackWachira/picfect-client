@@ -39,8 +39,7 @@ md-card #placeholder{
     background: #f6a375;
 }
 .selected {
-  background-color: #D9853C !important;
-  color: white;  
+  border: 3px solid #D9853C;
   box-shadow: 0 14px 28px rgba(0,0,0,0.22), 0 10px 10px rgba(255,102,0, 0.5);  
 }
 
