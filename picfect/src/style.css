@@ -22,3 +22,6 @@
  md-toolbar.md-primary{
       background: #73AFAD !important;
 }
+.pointer{
+  cursor: pointer;
+}

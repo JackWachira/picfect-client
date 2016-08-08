@@ -110,10 +110,13 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   }
   updateImage(imageId, categoryId) {
+    console.log("passed: " + categoryId);
+    
     this.canvasService.updateImage(imageId, categoryId).subscribe(
       data => {
         this.homeService.add(data);
-
+        console.log("passed: " + data.category);
+        
       },
       err => {
         console.log(err);

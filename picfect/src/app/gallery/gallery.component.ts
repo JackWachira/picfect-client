@@ -23,6 +23,7 @@ import {CategoryItem} from '../category/categoryitem';
 })
 export class GalleryComponent implements OnInit {
   @Input() galleryItem: GalleryItem[];
+  @Input() selectedImage: GalleryItem;
   @Input() categoryId = 0;
   @Input() categoryName = "";
   @Output() imageSelect = new EventEmitter();
@@ -60,6 +61,7 @@ export class GalleryComponent implements OnInit {
     this.loading = false;
   }
   selectImage(image: GalleryItem) {
+    this.selectedImage = image;
     this.homeService.triggerThumbnails(image);
     this.imageSelect.emit({
       value: image

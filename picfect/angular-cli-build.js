@@ -13,15 +13,15 @@ module.exports = function(defaults) {
       'systemjs/dist/system.src.js',
       'zone.js/dist/**/*.+(js|js.map)',
       'es6-shim/es6-shim.js',
-      'reflect-metadata/**/*.+(ts|js|js.map)',
-      'rxjs/**/*.+(js|js.map)',
-      '@angular/**/*.+(js|js.map)',
+      'reflect-metadata/**/*',
+      'rxjs/**/*',
+      '@angular/**/*',
       '@angular2-material/**/*',
-      'angular2-jwt/**/*.+(js|js.map)',
-      'ng2-facebook-sdk/dist/**/*.+(js|js.map)',
-      'ng2-uploader/**/*.+(js|js.map)',
-      'ng2-image-lazy-load/**/*.+(js|js.map)',
-      'ng2-toasty/**/*',
+      'angular2-jwt/**/*',
+      'ng2-facebook-sdk/dist/**/*',
+      'ng2-uploader/**/*',
+      'ng2-image-lazy-load/**/*',
+      'ng2-toasty/**/*'
     ]
   });
 };

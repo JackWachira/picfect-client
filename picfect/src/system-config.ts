@@ -12,7 +12,7 @@ const map: any = {
   'ng2-facebook-sdk': 'vendor/ng2-facebook-sdk',
   'ng2-uploader': 'vendor/ng2-uploader',
   'ng2-image-lazy-load': 'vendor/ng2-image-lazy-load',
-  'ng2-toasty': 'vendor/ng2-toasty',
+  'ng2-toasty': 'vendor/ng2-toasty'
 };
 
 /** User packages configuration. */
@@ -22,7 +22,7 @@ const packages: any = {
   'ng2-facebook-sdk': {main: 'ng2-facebook-sdk.js'},
   'ng2-uploader': {main: 'ng2-uploader.js'},
   'ng2-image-lazy-load': {main: 'ng2-image-lazy-load.js'},
-  'ng2-toasty': {main: 'ng2-toasty.js'},
+  'ng2-toasty': {main: 'ng2-toasty.js'}
 };
 const materialPkgs:string[] = [
   'core',

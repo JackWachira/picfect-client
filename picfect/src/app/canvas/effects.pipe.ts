@@ -9,8 +9,6 @@ export class EffectsPipe {
 
     // Retuns image filters matching query
     transform(filters, args?) {
-        console.log(filters);
-
         if (filters == null) {
             return filters;
         }

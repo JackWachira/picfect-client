@@ -26,7 +26,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.webapp"> {{#each mobile.icons}}
-  <link rel="{{rel}}" {{#if sizes}}sizes="{{sizes}}" {{/if}}href="{{href}}"> {{/each}} {{#if environment.production}}
+  <link rel="{{rel}}" {{#if sizes}}sizes="{{sizes}}" {{/if}}href="{{href}}"> {{/each}} 
+  <!--{{#if environment.production}}
   <script type="text/javascript">
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/worker.js').catch(function(err) {
@@ -34,7 +35,7 @@
       });
     }
     
-  </script> {{/if}}
+  </script> {{/if}}-->
 
 </head>
 
