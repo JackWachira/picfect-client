@@ -12,6 +12,12 @@ export class EffectsPipe {
         if (filters == null) {
             return filters;
         }
-        return filters.filter((item: Filters) => item.effect != 'flip' && item.effect != 'mirror');
+        let filtered = filters.filter((item: Filters) => item.effect != 'flip' && item.effect != 'mirror');
+        for (var i=0; i < filtered.length; i++) {
+            if (filtered[i].name.includes("app/media")) {
+                filtered[i].name = filtered[i].name.replace("/app", "")
+            }
+        }
+        return filtered;
     }
 }

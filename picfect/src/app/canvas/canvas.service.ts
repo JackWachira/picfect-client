@@ -13,12 +13,23 @@ export class CanvasService {
         this.url = environment.url;
     }
 
+    // Api call to get specific image    
+    getSpecificImage(imageId: number): Observable<GalleryItem[]> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
+        return this.http.get(this.url + '/api/images/' + imageId , {
+            headers: headers
+        })
+            .map(res => res.json());
+    }
+
     // Api call to fetch thumbnails
     getThumbnails(imageId: number): Observable<GalleryItem[]> {
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
-        return this.http.get(this.url + 'api/images/' + imageId + '/thumbnails/', {
+        return this.http.get(this.url + '/api/images/' + imageId + '/thumbnails/', {
             headers: headers
         })
             .map(res => res.json());
@@ -28,7 +39,7 @@ export class CanvasService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
-        return this.http.post(this.url + 'api/images/' + categoryId + '/edits/' + thumbId + '/', null, {
+        return this.http.post(this.url + '/api/images/edits/' + thumbId + '/', null, {
             headers: headers
         })
             .map(res => res.json());
@@ -38,7 +49,7 @@ export class CanvasService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
-        return this.http.put(this.url + 'api/images/' + imageId + '/', JSON.stringify({ "category": categoryId }), {
+        return this.http.put(this.url + '/api/images/' + imageId + '/', JSON.stringify({ "category": categoryId }), {
             headers: headers
         })
             .map(res => res.json());

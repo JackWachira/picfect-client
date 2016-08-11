@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren } from '@angular/core';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MD_PROGRESS_CIRCLE_DIRECTIVES} from '@angular2-material/progress-circle';
 import {GalleryService} from './gallery.service';
@@ -27,20 +27,27 @@ export class GalleryComponent implements OnInit {
   @Input() categoryId = 0;
   @Input() categoryName = "";
   @Output() imageSelect = new EventEmitter();
+  @ViewChildren('filteredGallery') filteredItems;
+  @Input() num_elements;
   loading = true;
   constructor(private router: Router, private galleryService: GalleryService, private homeService: HomeService) {
     this.homeService.getChangeEmitter().subscribe(item => this.onItemAdded(item));
     this.homeService.getCategoryEmitter().subscribe(item => this.onCategoryChanged(item));
   }
+  ngAfterViewInit() {
+    this.num_elements = this.filteredItems.toArray().length;
+  }
   onItemAdded(item: GalleryItem) {
-    console.log("item added");
-    console.log(item);
-    
     this.galleryItem.push(item);
   }
   onCategoryChanged(item : CategoryItem){
     this.categoryId = item.id;
     this.categoryName = item.name;
+  }
+  showAll(){
+    this.categoryId = 0;
+    this.categoryName = "";
+    this.homeService.deselect();
   }
   ngOnInit() {
     this.galleryService.getRecentImages().subscribe(
@@ -59,7 +66,9 @@ export class GalleryComponent implements OnInit {
   onReceiveImages(images: any) {
     this.galleryItem = images;
     this.loading = false;
+    this.homeService.addImages(images);
   }
+  
   selectImage(image: GalleryItem) {
     this.selectedImage = image;
     this.homeService.triggerThumbnails(image);

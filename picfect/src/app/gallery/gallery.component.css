@@ -3,6 +3,8 @@ md-card {
     height: 150px;
     box-sizing: border-box;
     margin: 1px 1px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
 }
 
 
@@ -11,35 +13,40 @@ md-card {
     flex-flow: row wrap;
     align-items: flex-start;
     align-content: flex-start;
-    border: 1px solid grey;
-    border-width:thin;
+    border-style:solid;
+    padding: 10px 0 10px 0;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+    border: 15px solid rgba(0,0,0,.1);
+    border-image: url('../img/1WlsT.png') 34% repeat;
     height: 507px;
     overflow-y: scroll;
 }
-
 .md-card-content p{
     text-align: center;
 }
-
 label{
     border: 1px solid grey;
     width: 100%;
     border-width:thin;
-    text-align: center;
+    display: inline-block;
     background: #568D8A;
     color: white;
+    position: relative;
 }
-md-progress-circle{
+md-progress-circle {
     text-align: center;
     vertical-align: middle;    
 }
 .selected {
-  border: 3px solid #D9853C;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.22), 0 10px 10px rgba(255,102,0, 0.5);  
+  border: 1px solid #73AFAD;
+  box-shadow: 0 14px 28px #73AFAD, 0 10px 10px rgba(0,0,0,0.32);  
 }
 ::-webkit-scrollbar {
     width: 14px;
     height: 18px;
+    
 }
 ::-webkit-scrollbar-thumb {
     height: 6px;
@@ -55,5 +62,30 @@ md-progress-circle{
     display: none;
 }
 ::-webkit-scrollbar-corner {
-    background-color: transparent;
+    background-color: #568D8A;
+}
+.category-label span{
+    top: 50%;
+    line-height: 0px;
+    left:100px;
+    position: absolute;  
+}
+.category-label i{
+    padding-left: 5px; 
+    cursor: pointer;
+}
+.category-static{
+    text-align: center;
+}
+.no-images{
+    text-align: center;
+}
+.no-images img{
+    height: 200px;
+    width: 200px;
+}
+.no-images label{
+    background: none;
+    border: none;
+    color: black;
 }

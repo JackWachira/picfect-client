@@ -28,10 +28,11 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   @Input() selectedImage: GalleryItem;
   @Input() selectedImageProperties: GalleryItem;
   @Input() imageUploaded: boolean;
+  @Input() filterApplied: boolean;
   @Output() imageReady = new EventEmitter();
   @Input() categoryId: number = 0;
   @Input() options: Object = {
-    url: 'http://localhost:8000/api/images/',
+    url: environment.url + '/api/images/',
     // withCredentials: true,
     authToken: localStorage.getItem('id_token'),
     authTokenPrefix: "Bearer facebook ",
@@ -58,7 +59,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
   showDetails(item: GalleryItem) {
     var self = this;
-    this.selectedImageProperties = item;
+    this.selectedImageProperties = new GalleryItem();
     this.selectedImageProperties.name = item.original_image.substring(item.original_image.lastIndexOf('/') + 1, item.original_image.length)
     var img = new Image();
     img.onload = function () {
@@ -107,16 +108,13 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
   onReceiveThumbnails(data) {
     this.filters = data;
-
   }
   updateImage(imageId, categoryId) {
-    console.log("passed: " + categoryId);
-    
     this.canvasService.updateImage(imageId, categoryId).subscribe(
       data => {
         this.homeService.add(data);
         console.log("passed: " + data.category);
-        
+
       },
       err => {
         console.log(err);
@@ -133,7 +131,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.selectedImage = new GalleryItem();
       this.selectedImage.id = this.filters[10].id;
       this.selectedImage.name = "";
-      this.selectedImage.original_image = this.server_url + this.filters[10].name;
+      this.selectedImage.original_image = this.server_url + this.filters[10].name.replace("/app", "");
       this.selectedImage.edited_image = "";
       this.selectedImage.date_created = "";
       this.selectedImage.date_modified = "";
@@ -143,12 +141,21 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.selectedImage = new GalleryItem();
       this.selectedImage.id = this.filters[8].id;
       this.selectedImage.name = "";
-      this.selectedImage.original_image = this.server_url + this.filters[8].name;
+      this.selectedImage.original_image = this.server_url + this.filters[8].name.replace("/app", "");
       this.selectedImage.edited_image = "";
       this.selectedImage.date_created = "";
       this.selectedImage.date_modified = "";
       this.selectedImage.category = this.categoryId;
       this.selectedImage.uploader = 1;
+    }
+  }
+  showOriginal() {
+    if (this.selectedFilter) {
+      console.log(this.homeService.getImages());
+      let all_images = this.homeService.getImages()
+      let original_image = all_images.filter((item: GalleryItem) => item.id == this.selectedFilter.original_image);
+      this.selectedImage = original_image[0];
+
     }
   }
   openFile(e) {
@@ -168,9 +175,11 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.selectedImage.uploader = 1;
   }
   shareImage() {
+    console.log(this.selectedImage.original_image);
     FB.ui({
       method: 'share',
-      href: 'http://www.freedigitalphotos.net/images/img/homepage/87357.jpg',
+      href: this.selectedImage.original_image,
+      picture: this.selectedImage.original_image
     }, function (response) { });
   }
   saveEffect() {

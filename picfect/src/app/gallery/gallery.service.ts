@@ -20,7 +20,7 @@ export class GalleryService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Bearer facebook ' + localStorage.getItem('id_token'));
-        return this.http.get(this.url + 'api/images/', {
+        return this.http.get(this.url + '/api/images/', {
             headers: headers
         })
             .map(res => res.json());

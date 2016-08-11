@@ -1,7 +1,15 @@
-<label *ngIf="!categoryName">Recent uploads</label>
-<label *ngIf="categoryName">{{categoryName}}</label>
+<label class="category-static" *ngIf="!categoryName">Recent uploads</label>
+<label class="category-label" *ngIf="categoryName">
+  <i (click)="showAll()" class="fa fa-th-list" aria-hidden="true"></i>
+  <span>{{categoryName}}</span>
+</label>
 <div class="card-container">
-  <md-card [class.selected]="pic === selectedImage" class="pointer" imageLazyLoadArea (click)="selectImage(pic)" *ngFor="let pic of galleryItem | categoryfilter:categoryId | sortfilter: categoryId">
+  <md-card [class.selected]="pic === selectedImage" class="pointer" imageLazyLoadArea (click)="selectImage(pic)" *ngFor="let pic of galleryItem | categoryfilter:categoryId | sortfilter: categoryId" #filteredGallery>
     <img md-card-image [alt]="pic.name" src={{pic.original_image}}>
   </md-card>
+  <div *ngIf="galleryItem | categoryfilter:categoryId" class="no-images">
+    <img src="../img/oops.png">
+    <label>There are no uploaded images</label>
+    {{filteredItems?.length}}
+  </div>
 </div>

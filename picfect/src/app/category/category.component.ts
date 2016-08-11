@@ -14,6 +14,13 @@ export class CategoryComponent implements OnInit {
   @Input() categorySelected: CategoryItem;
   constructor(private homeService: HomeService, private toastyService: ToastyService) {
     this.homeService.triggerToast$.subscribe(item => this.onToastTriggered());
+    this.homeService.deselect$.subscribe(item => this.onCategoryDeselect());
+  }
+  onCategoryDeselect(){
+    delete this.categorySelected;
+    this.homeService.changeCategory({name: "",
+    image: "string",
+    id: 0});    
   }
   onToastTriggered() {
     console.log("received toast");

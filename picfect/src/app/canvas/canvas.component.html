@@ -1,4 +1,5 @@
 <md-card class="main-image">
+  <button (click)="showOriginal()" class="noselect btn-original">ORIGINAL</button>  
   <div *ngIf="selectedImage" on-mouseover='showDetails(selectedImage)' class="images">
     <img class="img-responsive" md-card-image src={{selectedImage.original_image}}>
     <div *ngIf="selectedImageProperties" class="overlay">
@@ -19,10 +20,10 @@
     <i (click)="transformImage('flip')" class="pointer material-icons md-24">transform</i>
     <i (click)="transformImage('mirror')" class="pointer material-icons pointer md-24">flip</i>
   </md-card-actions>
-  <div *ngIf="imageUploaded" style="float:right;">
-    <i (click)="shareImage()" style="color: #73AFAD;" class="pointer fa fa-share-square fa-2x" aria-hidden="true"></i>
-    <a *ngIf="selectedImage" href="{{selectedImage.original_image}}" download="image.png"><span class="pointer fa fa-cloud-download fa-2x"></span></a>
-    <i (click)="saveEffect()" style="color: #73AFAD;" class="pointer fa fa-floppy-o fa-2x" aria-hidden="true"></i>
+  <div *ngIf="imageUploaded" class="activities" style="float:right;">
+    <i (click)="shareImage()" class="pointer fa fa-share-square fa-2x" aria-hidden="true"></i>
+    <a *ngIf="selectedImage" href="{{selectedImage.original_image}}" download="image.png"><i class="pointer fa fa-cloud-download fa-2x"></i></a>
+    <i (click)="saveEffect()" class="pointer fa fa-floppy-o fa-2x" aria-hidden="true"></i>
   </div>
   <div class="btn-operations">
     <div [hidden]="!imageUploaded" class="content">
@@ -44,7 +45,7 @@
 
 <div *ngIf="imageUploaded" class="filter-container">
   <div (click)="applyFilter(filter)" *ngFor="let filter of filters | effectsfilter" class="filters">
-    <img src="http://localhost:8000/{{filter.name}}">
+    <img src="{{server_url}}{{filter.name}}">
     <p>{{filter.effect}}</p>
   </div>
 </div>
