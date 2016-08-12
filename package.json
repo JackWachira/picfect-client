@@ -6,7 +6,6 @@
   "scripts": {
     "start": "ng build -prod && ng serve -prod",
     "preinstall": "npm i typings -g && npm install tsd -g",
-    // "postinstall": "typings install && tsd install",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
