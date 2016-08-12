@@ -172,8 +172,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   shareImage() {
     FB.ui({
       method: 'share',
-      href: this.selectedImage.original_image,
-      picture: this.selectedImage.original_image
+      href: this.selectedImage.original_image
+      // picture: this.selectedImage.original_image
     }, function (response) { });
   }
   saveEffect() {

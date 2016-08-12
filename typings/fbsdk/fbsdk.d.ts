@@ -18,7 +18,6 @@ interface FBInitParams{
 interface ShareDialogParams {
     method: string; // "share"
     href: string;
-    picture: string;
 }
 
 interface PageTabDialogParams {
