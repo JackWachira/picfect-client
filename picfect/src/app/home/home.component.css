@@ -1,6 +1,3 @@
-html,body,.container{
-      /*height:100vh;*/
-}
 .container-fluid{
     display:table;
     width: 100%;
@@ -15,10 +12,8 @@ html,body,.container{
 .row{
     height: 100%;
     display: table-row;
-    /*background: url(../img/gray_jean.png) repeat-x center center fixed; */
     background: url(../img/ecailles.png);
     background-repeat:repeat;
-
 }
 .col-md-3.no-float, .col-md-6.no-float {
     float: none;
@@ -49,10 +44,4 @@ md-toolbar.md-primary{
 #user-name{
     margin-right: 10px;
     font-size: 15px;
-}
-.container{
-    /*-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
 }

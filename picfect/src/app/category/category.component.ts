@@ -23,7 +23,6 @@ export class CategoryComponent implements OnInit {
     id: 0});    
   }
   onToastTriggered() {
-    console.log("received toast");
     this.addToast();
   }
   addToast() {
@@ -42,7 +41,6 @@ export class CategoryComponent implements OnInit {
         }, 1000, 2);
       },
       onRemove: function (toast: ToastData) {
-        console.log('Toast ' + toast.id + ' has been removed!');
       }
     };
     this.toastyService.warning(toastOptions);
@@ -72,11 +70,6 @@ export class CategoryComponent implements OnInit {
     this.categorySelected = category;
     this.homeService.changeCategory(category);
 
-  }
-  resetCategories() {
-    // this.categorySelect.emit({
-    //   value: 0
-    // })
   }
 
 }

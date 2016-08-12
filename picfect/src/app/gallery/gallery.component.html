@@ -7,9 +7,4 @@
   <md-card [class.selected]="pic === selectedImage" class="pointer" imageLazyLoadArea (click)="selectImage(pic)" *ngFor="let pic of galleryItem | categoryfilter:categoryId | sortfilter: categoryId" #filteredGallery>
     <img md-card-image [alt]="pic.name" src={{pic.original_image}}>
   </md-card>
-  <div *ngIf="galleryItem | categoryfilter:categoryId" class="no-images">
-    <img src="../img/oops.png">
-    <label>There are no uploaded images</label>
-    {{filteredItems?.length}}
-  </div>
 </div>

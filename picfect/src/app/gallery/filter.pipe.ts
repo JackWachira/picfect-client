@@ -7,7 +7,7 @@ import { GalleryItem } from './galleryitem';
 })
 export class CategoryPipe {
 
-    // Retuns gallery matching query
+    // Filters gallery items by category
     transform(gallery, args?) {
         let categoryId = args;
         if (gallery == null || categoryId == 0) {
@@ -23,7 +23,7 @@ export class CategoryPipe {
 })
 export class OrderPipe {
 
-    // Returns gallery matching query
+    // Orders images by date modified
     transform(gallery, args?) {
         if (gallery == null) {
             return gallery;            

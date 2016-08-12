@@ -6,7 +6,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Picfect" />
   <meta property="og:description" content="Photo editing application" />
-  <!--<meta property="og:image" content="http://www.your-domain.com/path/image.jpg" />-->
   <meta charset="utf-8">
   <title>Picfect</title>
   <base href="/"> {{#unless environment.production}}
@@ -27,16 +26,6 @@
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.webapp"> {{#each mobile.icons}}
   <link rel="{{rel}}" {{#if sizes}}sizes="{{sizes}}" {{/if}}href="{{href}}"> {{/each}} 
-  <!--{{#if environment.production}}
-  <script type="text/javascript">
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/worker.js').catch(function(err) {
-        console.log('Error installing service worker: ', err);
-      });
-    }
-    
-  </script> {{/if}}-->
-
 </head>
 
 <body>
@@ -60,9 +49,6 @@
           System.import('main');
         }).catch(console.error.bind(console));
       </script> {{/if}}
-
-
-
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {GalleryItem} from '../gallery/galleryitem';
 import {CategoryItem} from '../category/categoryitem';
+import {FacebookService, FacebookLoginResponse, FacebookInitParams} from 'ng2-facebook-sdk/dist/index';
 
 @Injectable()
 export class HomeService {
@@ -10,13 +11,23 @@ export class HomeService {
     public triggerToast$: EventEmitter<Object>;
     public deselect$: EventEmitter<Object>;
     public allImages: GalleryItem[];
-
-    constructor() {
+    constructor(private fb: FacebookService) {
         this.itemAdded$ = new EventEmitter<GalleryItem>();
         this.triggerThumbnail$ = new EventEmitter<GalleryItem>();
         this.categoryChanged$ = new EventEmitter<CategoryItem>();
         this.triggerToast$ = new EventEmitter<Object>();
         this.deselect$ = new EventEmitter<Object>();
+        let fbParams: FacebookInitParams = {
+            appId: '1622731728039944',
+            xfbml: true,
+            cookie: true,
+            version: 'v2.6'
+        };
+        this.fb.init(fbParams);
+
+    }
+    public getFb() {
+        return this.fb;
     }
     public deselect(): void {
         this.deselect$.emit(Object);
@@ -24,7 +35,7 @@ export class HomeService {
     public add(item: GalleryItem): void {
         this.itemAdded$.emit(item);
     }
-    public addImages(item: GalleryItem[]){
+    public addImages(item: GalleryItem[]) {
         this.allImages = item;
     }
     getChangeEmitter() {
@@ -39,16 +50,16 @@ export class HomeService {
     getCategoryEmitter() {
         return this.categoryChanged$;
     }
-    public triggerThumbnails(item: GalleryItem):void{
+    public triggerThumbnails(item: GalleryItem): void {
         this.triggerThumbnail$.emit(item);
     }
-    public changeCategory(item: CategoryItem):void{
+    public changeCategory(item: CategoryItem): void {
         this.categoryChanged$.emit(item);
     }
-    public showToast():void{
+    public showToast(): void {
         this.triggerToast$.emit(Object);
     }
-    public getImages(){
+    public getImages() {
         return this.allImages;
     }
 

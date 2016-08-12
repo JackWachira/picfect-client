@@ -1,5 +1,5 @@
 <md-card class="main-image">
-  <button (click)="showOriginal()" class="noselect btn-original">ORIGINAL</button>  
+  <button *ngIf="selectedFilter" (click)="showOriginal()" class="noselect btn-original">ORIGINAL</button>  
   <div *ngIf="selectedImage" on-mouseover='showDetails(selectedImage)' class="images">
     <img class="img-responsive" md-card-image src={{selectedImage.original_image}}>
     <div *ngIf="selectedImageProperties" class="overlay">

@@ -33,7 +33,6 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   @Input() categoryId: number = 0;
   @Input() options: Object = {
     url: environment.url + '/api/images/',
-    // withCredentials: true,
     authToken: localStorage.getItem('id_token'),
     authTokenPrefix: "Bearer facebook ",
     fieldName: 'original_image'
@@ -113,8 +112,6 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.canvasService.updateImage(imageId, categoryId).subscribe(
       data => {
         this.homeService.add(data);
-        console.log("passed: " + data.category);
-
       },
       err => {
         console.log(err);
@@ -151,11 +148,9 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
   showOriginal() {
     if (this.selectedFilter) {
-      console.log(this.homeService.getImages());
       let all_images = this.homeService.getImages()
       let original_image = all_images.filter((item: GalleryItem) => item.id == this.selectedFilter.original_image);
       this.selectedImage = original_image[0];
-
     }
   }
   openFile(e) {
@@ -175,7 +170,6 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.selectedImage.uploader = 1;
   }
   shareImage() {
-    console.log(this.selectedImage.original_image);
     FB.ui({
       method: 'share',
       href: this.selectedImage.original_image,
@@ -212,9 +206,4 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.getThumbnails(data.id);
     }
   }
-  loadFilters() {
-
-  }
-
-
 }

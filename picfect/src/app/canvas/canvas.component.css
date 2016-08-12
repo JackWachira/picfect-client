@@ -68,16 +68,13 @@ md-card img{
     padding: 10px;
 }
 .drop-image{
-    /*border: 1px dotted grey;
-    */
     border: 3px dashed #ccc;
     width: 350px;
     height: 250px;
     text-align: center;
     vertical-align: middle;
     background: url(../img/ecailles.png);
-    background-repeat:repeat;
-    
+    background-repeat:repeat;  
 }
 .drop-image p{
     font-family: 'Open Sans', sans-serif;
@@ -139,14 +136,10 @@ label.file-upload-label input {
 }
 a {
   text-decoration: none;
-  
   text-decoration: underline;
-  
 }
 .fa {
   padding-right: 5px;
-}
-a:hover .fa {
 }
 .styled-select {
    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
@@ -214,7 +207,7 @@ hr.style14 {
 .btn-original{
  right: 0;
  position: absolute;
- top: 5px;
+ top: 1px;
  right: 5px;
  height: 20px;
  border:1px solid #8ed058;

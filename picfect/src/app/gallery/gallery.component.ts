@@ -58,7 +58,7 @@ export class GalleryComponent implements OnInit {
     );
   }
   onError(data){
-    console.log(data.status);
+    // Log out a user if token has expired
     if(data.status == '401'){
         this.router.navigate(['']);
     }
