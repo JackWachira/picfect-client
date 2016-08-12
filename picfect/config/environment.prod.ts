@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  url: 'https://picfectapi.herokuapp.com/api/images/'
+  url: 'https://picfectapi.herokuapp.com'
 
 };
