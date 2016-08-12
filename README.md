@@ -1,14 +1,16 @@
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 ### Picfect
 
 This is a photo editing app written in Angular2 JS that consumes a Django Rest API.
 
 It enables uploading and applying of filters to images. Among the filters you can apply are:
 
-- Blur          - Emboss        - Grayscale     - Sharpen
+- Blur          - Contour       - Grayscale     - Sharpen
 
-- Contrast      - Flip          - Invert        - Smooth
+- Flip          - Invert        - Smooth        - Posterize
 
-- Detail        - Find Edges    - Mirror        - Solarize
+- Detail        - Emboss        - Mirror        - Solarize
 
 ### Technologies used
 
@@ -20,7 +22,7 @@ It enables uploading and applying of filters to images. Among the filters you ca
 
 [Pillow](https://python-pillow.org/) - Python Image Manipulation Library
 
-[Angular2JS](https://angular.io/) - JS front end MVC (MVVM?) framework
+[Angular2JS](https://angular.io/) - Front end Framework
 
 [Django Rest Framework](http://www.django-rest-framework.org/) - Framework built on top of Django for creating API's
 
@@ -40,7 +42,7 @@ It enables uploading and applying of filters to images. Among the filters you ca
 1. Run `git clone `
 2. `cd` into `picfect-client`
 3. Run `npm install`
-4  Run `ng serve`
+4. Run `ng serve`
 
 #### Running on Heroku
 
